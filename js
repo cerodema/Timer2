@@ -26,19 +26,27 @@ function c(str){return document.querySelector(str);}
 
 // ...
 function changeMinSecToTime(value){
+  var min, sec, minSec;
   if(value.length == 3){
-    var min = value.slice(0,1);
-    var sec = value.slice(1);
-    var minSec = [min, sec];
+     min = value.slice(0,1);
+     sec = value.slice(1);
+     minSec = [min, sec];
+    return minSec;
+  } else if(value.length == 4){
+     min = value.slice(0,2);
+     sec = value.slice(2);
+     minSec = [min, sec];
     return minSec;
   }
 }
+
 function setTimer(){
-  var setShow = c("#timer-set");
-  var setTime = c("#hour").value + changeMinSecToTime(c("#minute-second").value)[0] + changeMinSecToTime(c("#minute-second").value)[1];
-  setShow.innerHTML = "setTime";
-  
+  var setShow = c("#time-set");
+  var setTime = c("#hour").value +":"+ checkTime(changeMinSecToTime(c("#minute-second").value)[0]) +":"+ changeMinSecToTime(c("#minute-second").value)[1];
+  setShow.innerHTML = setTime;
 }
+
+
 
 function setHour(i){
   c("#hour").value = i;
