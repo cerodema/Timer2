@@ -1,3 +1,5 @@
+function c(str){return document.querySelector(str);}
+
 function startTime() {
     var today = new Date();
     var h = today.getHours();
@@ -9,6 +11,7 @@ function startTime() {
     document.getElementById('time-on').innerHTML =
     h + ":" + m + ":" + s;
     setHour(h);
+    alarmCheck(c("#time-on"), c("#time-set"));
     var t = setTimeout(startTime, 500);
     
 }
@@ -22,7 +25,7 @@ function checkHour(i) {
     return i;
 }
 
-function c(str){return document.querySelector(str);}
+
 
 // ...
 function changeMinSecToTime(value){
@@ -46,7 +49,14 @@ function setTimer(){
   setShow.innerHTML = setTime;
 }
 
-
+//...
+function alarmCheck(clock, timer){
+  if(timer.innerHTML == clock.innerHTML ){
+    alert("Time Out!");
+    setTimeOut();
+  }
+  
+}
 
 function setHour(i){
   c("#hour").value = i;
