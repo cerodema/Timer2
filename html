@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body onload="startTime()">
+    <h4>Title</h4>
+    <div>
+      <label>Time:</label>
+      <p id='time-on' ></p>
+      
+    </div>
+    <div>
+      <label>Set:</label>
+      <br>
+      <span id="time-set"></span>
+      <button id="btn-cancel">Delete</button>
+      <div id='extra-set'>
+      <span id="time-set-1"></span>
+      <button id="btn-cancel">Delete</button>
+      <br>
+      <span id="time-set-2"></span>
+      <button id="btn-cancel">Delete</button>
+      <br>
+      <span id="time-set-3"></span>
+      <button id="btn-cancel">Delete</button>
+      <br>
+      <span id="time-set-4"></span>
+      <button id="btn-cancel">Delete</button>
+      </div>
+    </div>
+    <div>
+      <label>Timer:</label>
+      <div id="time-to" >
+        <input class="time-in" id="hour" type="text" >
+        <span>:</span>
+        <label></label>
+        <input class="time-in" id="minute-second" autofocus type="text" >
+        <span id="sufix" >PM</span>
+        <span>.</span>
+        <button id='btn-go' onclick="setTimer()" >Save</button>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
