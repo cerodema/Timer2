@@ -83,8 +83,26 @@ function removeInitZero(num) {
   } else {
     return num;
   }
+}
+
+function wholeBtn(){
+  c("#btn-whole").addEventListener('click', function(e){
+    wholeSet();
+  });
+}
+
+
+function wholeSet(){
+  var input = c("#whole");
+  var setter = c("#whole-set");
+  
+  var rg = new RegExp("(\\d\\d:)?\\d\\d:\\d\\d\\s(pm|am)?", "gim");
+  var time = rg.exec(input.value);
+  c("#whole-set").innerHTML = time[0];
   
 }
+
+wholeBtn();
 
 function setHour(i){
   c("#hour").value = i;
