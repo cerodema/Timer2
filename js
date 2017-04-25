@@ -53,7 +53,7 @@ function setTimer(){
 function alarmCheck(clock, timer){
   if(timer.innerHTML == clock.innerHTML ){
     alert("Time Out!");
-    setTimeOut();
+    //setTimeOut();
   }
   
 }
