@@ -28,7 +28,8 @@ function checkHour(i) {
 
 
 // ...
-function changeMinSecToTime(value){
+function changeMinSecToTime(num){
+  var value = removeInitZero(num);
   var min, sec, minSec;
   if(value.length == 3){
      min = value.slice(0,1);
@@ -57,7 +58,6 @@ function alarmCheck(clock, timer){
       c("#container").style.backgroundColor = "red";
     setTimeout(defaultBg, 200);
   }
-  
 }
 
 function defaultBg(){
@@ -76,6 +76,15 @@ function listenEnter(){
 }
 
 listenEnter();
+
+function removeInitZero(num) {
+  if (num.slice(0, 1) == 0){
+    return num.slice(1);
+  } else {
+    return num;
+  }
+  
+}
 
 function setHour(i){
   c("#hour").value = i;
