@@ -64,6 +64,19 @@ function defaultBg(){
   c("#container").style.backgroundColor = "white";
 }
 
+
+function listenEnter(){
+  var minSec = c("#minute-second");
+  minSec.addEventListener("keyup", function(ev){
+    ev.keyCode = ev.which || ev.keyCode;
+    if (ev.keyCode === 13) {
+      c("#btn-go").click();
+    }
+  });
+}
+
+listenEnter();
+
 function setHour(i){
   c("#hour").value = i;
 }
