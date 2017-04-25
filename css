@@ -7,6 +7,10 @@
   width:21px;
 }
 
+#container {
+  padding:5px;
+}
+
 #extra-set{
   display:none;
 }
