@@ -52,10 +52,16 @@ function setTimer(){
 //...
 function alarmCheck(clock, timer){
   if(timer.innerHTML == clock.innerHTML ){
-    alert("Time Out!");
-    //setTimeOut();
+    //alert("Time Out!");
+    
+      c("#container").style.backgroundColor = "red";
+    setTimeout(defaultBg, 200);
   }
   
+}
+
+function defaultBg(){
+  c("#container").style.backgroundColor = "white";
 }
 
 function setHour(i){
