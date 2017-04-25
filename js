@@ -65,17 +65,17 @@ function defaultBg(){
 }
 
 
-function listenEnter(){
-  var minSec = c("#minute-second");
-  minSec.addEventListener("keyup", function(ev){
+function listenEnter(input, btn){
+  
+  input.addEventListener("keyup", function(ev){
     ev.keyCode = ev.which || ev.keyCode;
     if (ev.keyCode === 13) {
-      c("#btn-go").click();
+      btn.click();
     }
   });
 }
 
-listenEnter();
+listenEnter(c("#minute-second"), c("#btn-go"));
 
 function removeInitZero(num) {
   if (num.slice(0, 1) == 0){
