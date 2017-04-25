@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <style>
+#minute-second {
+  width:50px;
+  
+}
+
+#hour {
+  width:21px;
+}
+
+#extra-set{
+  display:none;
+}
+</style> </head>
+  <body onload="startTime()">
+    <h4>Title</h4>
+    <div id='container'>
+    <div>
+      <label>Time:</label>
+      <p id='time-on' ></p>
+      
+    </div>
+    <div>
+      <label>Set:</label>
+      <br>
+      <span id="time-set"></span>
+      <button id="btn-cancel">Delete</button>
+      <div id='extra-set'>
+      <span id="time-set-1"></span>
+      <button id="btn-cancel">Delete</button>
+      <br>
+      <span id="time-set-2"></span>
+      <button id="btn-cancel">Delete</button>
+      <br>
+      <span id="time-set-3"></span>
+      <button id="btn-cancel">Delete</button>
+      <br>
+      <span id="time-set-4"></span>
+      <button id="btn-cancel">Delete</button>
+      </div>
+    </div>
+    <div>
+      <label>Timer:</label>
+      <div id="time-to" >
+        <input class="time-in" id="hour" type="text" >
+        <span>:</span>
+        <label></label>
+        <input class="time-in" id="minute-second" autofocus type="text" >
+        <span id="sufix" >PM</span>
+        <span>.</span>
+        <button id='btn-go' onclick="setTimer()" >Save</button>
+      </div>
+    </div>
+    </div>
+    <script >
+function c(str){return document.querySelector(str);}
+
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    h = checkHour(h);
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('time-on').innerHTML =
+    h + ":" + m + ":" + s;
+    setHour(h);
+    alarmCheck(c("#time-on"), c("#time-set"));
+    var t = setTimeout(startTime, 500);
+    
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i;}  // add zero in front of numbers < 10
+    return i;
+}
+
+function checkHour(i) {
+    if (i > 12) {i = i - 12;}  // make hour pm/am
+    return i;
+}
+
+
+
+// ...
+function changeMinSecToTime(value){
+  var min, sec, minSec;
+  if(value.length == 3){
+     min = value.slice(0,1);
+     sec = value.slice(1);
+     minSec = [min, sec];
+    return minSec;
+  } else if(value.length == 4){
+     min = value.slice(0,2);
+     sec = value.slice(2);
+     minSec = [min, sec];
+    return minSec;
+  }
+}
+
+function setTimer(){
+  var setShow = c("#time-set");
+  var setTime = c("#hour").value +":"+ checkTime(changeMinSecToTime(c("#minute-second").value)[0]) +":"+ changeMinSecToTime(c("#minute-second").value)[1];
+  setShow.innerHTML = setTime;
+}
+
+//...
+function alarmCheck(clock, timer){
+  if(timer.innerHTML == clock.innerHTML ){
+    //alert("Time Out!");
+    
+      c("#container").style.backgroundColor = "red";
+    setTimeout(defaultBg, 200);
+  }
+  
+}
+
+function defaultBg(){
+  c("#container").style.backgroundColor = "white";
+}
+
+function setHour(i){
+  c("#hour").value = i;
+}
+
+</script>
+  </body>
+</html>
