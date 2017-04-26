@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <title>Timer</title>
     <style>
-#minute-second {
+	#minute-second {
   width:50px;
   
 }
@@ -14,10 +14,20 @@
   width:21px;
 }
 
+#container {
+  padding:5px;
+}
+
+#whole {
+  width:250px;
+  height:120px;
+}
+
 #extra-set{
   display:none;
 }
-</style> </head>
+</style>
+  </head>
   <body onload="startTime()">
     <h4>Title</h4>
     <div id='container'>
@@ -57,8 +67,18 @@
         <button id='btn-go' onclick="setTimer()" >Save</button>
       </div>
     </div>
+    <div>
+      <label>Enter text with time:</label>
+      <br>
+      <span id='whole-set'></span>
+      <button id="whole-del">Delete</button>
+      <br>
+      <textarea id='whole'>01:20:05 PM
+Is there anything else that I could assist you with?</textarea>
+      <button id='btn-whole'>Save</button>
     </div>
-    <script >
+    </div>
+    <script>
 function c(str){return document.querySelector(str);}
 
 function startTime() {
@@ -89,7 +109,8 @@ function checkHour(i) {
 
 
 // ...
-function changeMinSecToTime(value){
+function changeMinSecToTime(num){
+  var value = removeInitZero(num);
   var min, sec, minSec;
   if(value.length == 3){
      min = value.slice(0,1);
@@ -118,17 +139,55 @@ function alarmCheck(clock, timer){
       c("#container").style.backgroundColor = "red";
     setTimeout(defaultBg, 200);
   }
-  
 }
 
 function defaultBg(){
   c("#container").style.backgroundColor = "white";
 }
 
+
+function listenEnter(input, btn){
+  
+  input.addEventListener("keyup", function(ev){
+    ev.keyCode = ev.which || ev.keyCode;
+    if (ev.keyCode === 13) {
+      btn.click();
+    }
+  });
+}
+
+listenEnter(c("#minute-second"), c("#btn-go"));
+
+function removeInitZero(num) {
+  if (num.slice(0, 1) == 0){
+    return num.slice(1);
+  } else {
+    return num;
+  }
+}
+
+function wholeBtn(){
+  c("#btn-whole").addEventListener('click', function(e){
+    wholeSet();
+  });
+}
+
+
+function wholeSet(){
+  var input = c("#whole");
+  var setter = c("#whole-set");
+  
+  var rg = new RegExp("(\\d\\d:)?\\d\\d:\\d\\d\\s(pm|am)?", "gim");
+  var time = rg.exec(input.value);
+  c("#whole-set").innerHTML = time[0];
+  
+}
+
+wholeBtn();
+
 function setHour(i){
   c("#hour").value = i;
 }
-
 </script>
   </body>
 </html>
