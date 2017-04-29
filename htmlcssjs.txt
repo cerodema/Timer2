@@ -2,12 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" 
 
-<meta name="viewport" content="width=device-width">
-    
-
-<title>Timer</title>
+content="width=device-width">
+    <title>Timer</title>
     <style>
 #minute-second {
   width:50px;
@@ -34,55 +32,43 @@
 
 </style> </head>
   <body onload="startTime()">
-    
-
-<h4>Title</h4>
+    <h4>Title</h4>
     <div id='container'>
     <div>
-      
+     
 
-<label>Time:</label>
+ <label>Time:</label>
       <p id='time-on' ></p>
       
-    
-
-</div>
+    </div>
     <div>
       <label>Set:</label>
-      <span 
-
-id='temp'></span>  <br>   <span id="time-set"></span>
       
 
-<button id="btn-cancel" onclick="deleteSetTimer()" 
+<span id='temp'></span>  <br>   <span id="time-set"></span>
+      <button id="btn-cancel" 
 
->Delete</button>
+onclick="deleteSetTimer()" >Delete</button>
       <div id='extra-set'>
-      <span 
+      <span id="time-set-
 
-id="time-set-1"></span>
-      <button id="btn-
-
-cancel">Delete</button>
+1"></span>
+      <button id="btn-cancel">Delete</button>
       <br>
       <span id="time-set-
 
 2"></span>
       <button id="btn-cancel">Delete</button>
-      
-
-<br>
-      <span id="time-set-3"></span>
-      <button 
-
-id="btn-cancel">Delete</button>
       <br>
-      <span 
+      <span id="time-set-
 
-id="time-set-4"></span>
-      <button id="btn-
+3"></span>
+      <button id="btn-cancel">Delete</button>
+      <br>
+      <span id="time-set-
 
-cancel">Delete</button>
+4"></span>
+      <button id="btn-cancel">Delete</button>
       </div>
     </div>
     <div>
@@ -90,27 +76,21 @@ cancel">Delete</button>
 
 <label>Timer:</label>
       <div id="time-to" >
-        <input 
+        <input class="time-in" id="hour" type="text" >
+    
 
-class="time-in" id="hour" type="text" >
-        <span>:</span>
- 
+    <span>:</span>
+        <label></label>
+        <input class="time-in" id="minute-second" autofocus 
 
-       <label></label>
-        <input class="time-in" 
-
-id="minute-second" autofocus type="text" >
-        <span 
-
-id="sufix" >PM</span>
+type="text" >
+        <span id="sufix" >PM</span>
         <span>.</span>
-        <button 
+        <button id='btn-go' 
 
-id='btn-go' onclick="setTimer()" >Save</button>
+onclick="setTimer()" >Save</button>
       </div>
-   
-
- </div>
+    </div>
     </div>
     <script >
 
@@ -120,51 +100,40 @@ function c(str){return document.querySelector(str);}
 
 function startTime() {
     var today = new Date();
-    var h = 
+    var h = today.getHours();
+    var m = 
 
-today.getHours();
-    var m = today.getMinutes();
-    var s = 
-
-today.getSeconds();
+today.getMinutes();
+    var s = today.getSeconds();
     h = checkHour(h);
     m = checkTime(m);
- 
+    s = 
 
-   s = checkTime(s);
-    document.getElementById('time-
-
-on').innerHTML =
+checkTime(s);
+    document.getElementById('time-on').innerHTML =
     h + ":" + m + ":" + s;
-    setHour(h);
     
 
-alarmCheck(c("#time-on"), c("#time-set"));
+setHour(h);
+    alarmCheck(c("#time-on"), c("#time-set"));
   
 
-calcTemp(c("#time-on").innerHTML, true, c("#time-
-
-set").innerHTML);
-
+calcTemp(c("#time-on").innerHTML, true, c("#time-set").innerHTML);
+changeFontColor(c("#temp"));
   var t = setTimeout(startTime, 500);
     
 }
 
 
 function checkTime(i) {
-    if (i < 10) {i = "0" + i;}  // add 
-
-zero in front of numbers < 10
+    if (i < 10) {i = "0" + i;}  // add zero in front of numbers < 10
     return i;
 }
 
 
 
 function checkHour(i) {
-    if (i > 12) {i = i - 12;}  // make 
-
-hour pm/am
-    return i;
+    if (i > 12) {i = i - 12;}     return i;
 }
 
 
@@ -183,9 +152,7 @@ function deduct2FromMinutes(min){
 function deduct7FromSeconds(sec){
 	if(sec >= 7){
 		return parseInt(sec) - 7;
-	} else { return sec; /*return parseInt(sec) + 60 - 
-
-7*/}
+	} else { return sec; /*return parseInt(sec) + 60 - 7*/}
 }
 
 function deleteSetTimer(){
@@ -193,9 +160,7 @@ function deleteSetTimer(){
 }
 
 function focusInput(elem){
-	c("#container").addEventListener("click", function
-
-(ev){
+	c("#container").addEventListener("click", function(ev){
 		elem.focus();
 		
 	});
@@ -205,26 +170,22 @@ focusInput(c("#minute-second"));
 
 function changeMinSecToTime(value){
   var min, sec, minSec;
-  
+  if(value.length == 3){
+     min = 
 
-if(value.length == 3){
-     min = value.slice(0,1);
-     sec = 
-
-value.slice(1);
+value.slice(0,1);
+     sec = value.slice(1);
      minSec = [min, sec];
     return minSec;
-  } 
+  } else if
 
-else if(value.length == 4){
+(value.length == 4){
      min = value.slice(0,2);
-     
-
-sec = value.slice(2);
+     sec = value.slice(2);
      minSec = [min, sec];
-    return 
+    
 
-minSec;
+return minSec;
   }
 }
 
@@ -232,15 +193,11 @@ minSec;
 
 function setTimer(){
   var setShow = c("#time-set");
-  var 
+  var setTime = c("#hour").value +":"+  
 
-setTime = c("#hour").value +":"+  checkTime
+checkTime(deduct2FromMinutes( changeMinSecToTime(c("#minute-second").value)[0]) ) +":" + 
 
-(deduct2FromMinutes( changeMinSecToTime(c("#minute-
-
-second").value)[0]) ) +":"+ deduct7FromSeconds
-
-(changeMinSecToTime(c("#minute-second").value)[1]);
+changeMinSecToTime(c("#minute-second").value)[1];
   
 
 setShow.innerHTML = setTime;
@@ -285,12 +242,8 @@ return (hour + min + sec) ;
 function convertNumTo24Time(num){
 var h = parseInt(num / 3600 );
 var m = parseInt(((num / 3600) - h) * 60);
-var s = parseInt(((((num / 3600) - h) * 60) - m) * 60/* + 
-
-0.0000000001*/ );
-return h.toString() + ":" + addLeft0(m.toString()) + ":" + 
-
-addLeft0(s.toString());
+var s = parseInt(((((num / 3600) - h) * 60) - m) * 60/* + 0.0000000001*/ );
+return h.toString() + ":" + addLeft0(m.toString()) + ":" + addLeft0(s.toString());
 }
 
 function addLeft0(time){
@@ -302,34 +255,39 @@ return time;
 
 }
 
+// need continuation
+function removeSemicolons(txt){
+	if(txt.search(":")){
+		return txt.replace(":", "");
+} else { return txt; }
+}
+
+function changeFontColor(elem){
+	if(elem.innerHTML.toString().slice(5) < 10 && elem.innerHTML.toString().slice(5) > 0) {
+	elem.style.color = "red";
+} else { elem.style.color = "black"; }
+}
+
 function alarmCheck(clock, timer){
-  if(timer.innerHTML == 
+  if(timer.innerHTML == clock.innerHTML ){
+    //alert("Time 
 
-clock.innerHTML ){
-    //alert("Time Out!");
+Out!");
     
-      c
+      c("#container").style.backgroundColor = "red";
+    setTimeout(defaultBg, 200);
+  } else 
 
-("#container").style.backgroundColor = "red";
-    setTimeout
+if(clock.innerHTML > timer.innerHTML){ c("#time-set").style.color = "red"; }
+ else if
 
-(defaultBg, 200);
-  } else if(clock.innerHTML > 
-
-timer.innerHTML){ c("#time-set").style.color = "red"; }
- else 
-
-if(clock.innerHTML < timer.innerHTML) { c("#time-
-
-set").style.color = "black"; } 
+(clock.innerHTML < timer.innerHTML) { c("#time-set").style.color = "black"; } 
 }
 
 
 
 function defaultBg(){
-  c("#container").style.backgroundColor 
-
-= "white";
+  c("#container").style.backgroundColor = "white";
 }
 
 
@@ -337,16 +295,14 @@ function defaultBg(){
 
 function listenEnter(){
   var minSec = c("#minute-second");
-  
+  minSec.addEventListener("keyup", 
 
-minSec.addEventListener("keyup", function(ev){
-    ev.keyCode 
-
-= ev.which || ev.keyCode;
+function(ev){
+    ev.keyCode = ev.which || ev.keyCode;
     if (ev.keyCode === 13) {
-      c
+      c("#btn-
 
-("#btn-go").click();
+go").click();
  
 
    }
@@ -356,9 +312,7 @@ minSec.addEventListener("keyup", function(ev){
 listenEnter();
 
 function setHour(i){
-  c
-
-("#hour").value = i;
+  c("#hour").value = i;
 }
 
 
