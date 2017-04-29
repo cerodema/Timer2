@@ -129,7 +129,7 @@ setHour(h);
 calcTemp(c("#time-on").innerHTML, true, c("#time-set").innerHTML);
 changeFontColor(c("#temp"));
 buttonTime(c("#alive"));
-
+alertTwice(c("#time-on"), c("#time-set"));
 
   var t = setTimeout(startTime, 500);
     
@@ -278,21 +278,36 @@ function changeFontColor(elem){
 	elem.style.color = "red";
 } else { elem.style.color = "black"; }
 }
+
+// make a button count and reset for response time when searching
 var originalTime = 90; 
 function buttonTime(elem) {
 	var stopTime = - 30;
 	originalTime -= 0.5;
-	if (originalTime < stopTime) {
+	/*if (originalTime < stopTime) {
 	originalTime = originalTime * -0.5 + 30;
-}
+}*/
 
 elem.innerHTML = parseInt(originalTime);
 
 }
 
 function resetTime() {
-	c("#alive").innerHTML = 90;
+	//c("#alive").innerHTML = 90;
+	originalTime = 90;
 }
+
+function alertTwice(clock, timer) {
+	if (timer.innerHTML.length > 0) {
+	var tim = timer.innerHTML.toString().split(":");
+	//var clo = clock.innerHTML.toString().split(":");
+	if (clock.innerHTML == timer.innerHTML) {
+	var newMin = parseInt(tim[1]) + 2;
+	timer.innerHTML = tim[0] + ":" + newMin.toString()  + ":" +  tim[2];
+}
+}	
+}
+
 
 function alarmCheck(clock, timer){
   if(timer.innerHTML == clock.innerHTML ){
