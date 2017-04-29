@@ -30,6 +30,12 @@ content="width=device-width">
 	
 }
 
+#alive {
+	position:relative;
+	left: 45%;	
+	width: 3em;
+}
+
 </style> </head>
   <body onload="startTime()">
     <h4>Title</h4>
@@ -37,15 +43,17 @@ content="width=device-width">
     <div>
      
 
- <label>Time:</label>
-      <p id='time-on' ></p>
-      
+<!-- <label>Time:</label>
+ -->     <span id='time-on' ></span>
+     <button id="alive" 
+
+onclick="resetTime()" >t</button> 
     </div>
     <div>
       <label>Set:</label>
-      
+      <span 
 
-<span id='temp'></span>  <br>   <span id="time-set"></span>
+id='temp'></span>  <br>   <span id="time-set"></span>
       <button id="btn-cancel" 
 
 onclick="deleteSetTimer()" >Delete</button>
@@ -120,6 +128,9 @@ setHour(h);
 
 calcTemp(c("#time-on").innerHTML, true, c("#time-set").innerHTML);
 changeFontColor(c("#temp"));
+buttonTime(c("#alive"));
+
+
   var t = setTimeout(startTime, 500);
     
 }
@@ -266,6 +277,21 @@ function changeFontColor(elem){
 	if(elem.innerHTML.toString().slice(5) < 10 && elem.innerHTML.toString().slice(5) > 0) {
 	elem.style.color = "red";
 } else { elem.style.color = "black"; }
+}
+var originalTime = 90; 
+function buttonTime(elem) {
+	var stopTime = - 30;
+	originalTime -= 0.5;
+	if (originalTime < stopTime) {
+	originalTime = originalTime * -0.5 + 30;
+}
+
+elem.innerHTML = parseInt(originalTime);
+
+}
+
+function resetTime() {
+	c("#alive").innerHTML = 90;
 }
 
 function alarmCheck(clock, timer){
